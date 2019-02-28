@@ -1,8 +1,19 @@
 [package]
-name = "tao-log"
-version = "0.1.0"
-authors = ["David Kellum <dek-oss@gravitext.com>"]
-edition = "2018"
+name          = "tao-log"
+version       = "0.1.0"
+authors       = ["David Kellum <dek-oss@gravitext.com>"]
+edition       = "2018"
+license       = "MIT/Apache-2.0"
+description   = "Extension macros for output to the rust log crate."
+documentation = "https://docs.rs/tao-log"
+repository    = "https://github.com/dekellum/tao-log"
+readme        = "README.md"
+keywords      = ["log", "logging"]
+categories    = ["Debugging"]
+exclude       = [".gitignore", ".travis.yml", "appveyor.yml"]
+
+[badges]
+travis-ci = { repository="dekellum/tao-log" }
 
 [dependencies]
 log = { version = ">= 0.4.6, < 0.5" }
