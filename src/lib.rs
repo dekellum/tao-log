@@ -132,12 +132,13 @@
 //! let i = 32;
 //! infov!(i);
 //! infov!("", "{:?}", i);       // equivalent to above
+//! // ^------------------------ info log: i → 32
 //! infov!("index", i);          // non-empty prefix with additional context
 //! // ^------------------------ info log: index i → 32
 //! infov!("index", "{}", i);    // use `Display` instead of `Debug`
 //! infov!("index", "{:#x}", i); // hexadecimal format value
 //! // ^------------------------ info log: index i → 0x20
-//! infov!("index", "{:#?}", i); // use pretty, multi-line format
+//! infov!("index", "{:#?}", i); // pretty multi-line format, more for structs
 //! ```
 //!
 //! ### Specifying the logging target
@@ -166,12 +167,11 @@
 //! [`std::fmt`]: https://doc.rust-lang.org/stable/std/fmt/index.html
 //! [`std::dbg!`]: https://doc.rust-lang.org/std/macro.dbg.html
 
-#![doc(html_logo_url = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Yin_and_Yang.svg")]
+#![doc(html_logo_url = "http://gravitext.com/svg/yin_yang.svg")]
 
 pub use ::log;
 
 pub use log::Level;
-
 pub use log::{debug, error, info, log, log_enabled, trace, warn};
 
 #[macro_use] mod macros;
