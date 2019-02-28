@@ -54,31 +54,31 @@ macro_rules! logv {
 /// Log an expression at the error level, returning the value.
 #[macro_export(local_inner_macros)]
 macro_rules! errorv {
-    ($($arg:tt)+) => (__logv!(log::Level::Error, $($arg)+))
+    ($($arg:tt)+) => (__logv!($crate::Level::Error, $($arg)+))
 }
 
 /// Log an expression at the warn level, returning the value.
 #[macro_export(local_inner_macros)]
 macro_rules! warnv {
-    ($($arg:tt)+) => (__logv!(log::Level::Warn, $($arg)+))
+    ($($arg:tt)+) => (__logv!($crate::Level::Warn, $($arg)+))
 }
 
 /// Log an expression at the info level, returning the value.
 #[macro_export(local_inner_macros)]
 macro_rules! infov {
-    ($($arg:tt)+) => (__logv!(log::Level::Info, $($arg)+))
+    ($($arg:tt)+) => (__logv!($crate::Level::Info, $($arg)+))
 }
 
 /// Log an expression at the debug level, returning the value.
 #[macro_export(local_inner_macros)]
 macro_rules! debugv {
-    ($($arg:tt)+) => (__logv!(log::Level::Debug, $($arg)+))
+    ($($arg:tt)+) => (__logv!($crate::Level::Debug, $($arg)+))
 }
 
 /// Log an expression at the trace level, returning the value.
 #[macro_export(local_inner_macros)]
 macro_rules! tracev {
-    ($($arg:tt)+) => (__logv!(log::Level::Trace, $($arg)+))
+    ($($arg:tt)+) => (__logv!($crate::Level::Trace, $($arg)+))
 }
 
 // Helper macro for the -v macros, handling the permutations of optional
@@ -117,7 +117,7 @@ macro_rules! __logv_eval {
             vt => {
                 let pre: &str = $pre;
                 let sep = if pre.is_empty() { "" } else { " " };
-                log!(target: $tgt,
+                $crate::log!(target: $tgt,
                      $lvl,
                      __log_concat!("{}{}{} → ", $vfmt),
                      pre,
