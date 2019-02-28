@@ -134,8 +134,8 @@
 //! infov!("", "{:?}", i);       // equivalent to above
 //! // ^------------------------ info log: i → 32
 //! infov!("index", i);          // non-empty prefix with additional context
-//! // ^------------------------ info log: index i → 32
 //! infov!("index", "{}", i);    // use `Display` instead of `Debug`
+//! // ^------------------------ info log: index i → 32
 //! infov!("index", "{:#x}", i); // hexadecimal format value
 //! // ^------------------------ info log: index i → 0x20
 //! infov!("index", "{:#?}", i); // pretty multi-line format, more for structs
