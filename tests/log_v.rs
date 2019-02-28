@@ -64,16 +64,22 @@ fn main() {
     assert_eq!(last(&a), Some("i → 32".to_owned()));
 
     // Use custom format (note: Display format, hex output)
-    assert_eq!(warnv!("custom: {} → {:#x}", i), 32);
-    assert_eq!(last(&a), Some("custom: i → 0x20".to_owned()));
-
-    // Use custom format with named specifiers (note: Display format)
-    assert_eq!(infov!("index: {1:5?} ({0})", i), 32);
-    assert_eq!(last(&a), Some("index:    32 (i)".to_owned()));
+    assert_eq!(warnv!("index", "{:#x}", i), 32);
+    assert_eq!(last(&a), Some("index i → 0x20".to_owned()));
 
     // Use both special target and custom format
-    assert_eq!(errorv!(target: "special", "custom: {} → {:05}", i), 32);
+    assert_eq!(errorv!(target: "special", "custom:", "{:05}", i), 32);
     assert_eq!(last(&a), Some("custom: i → 00032".to_owned()));
+
+    // Use heap-String as prefix
+    let ctx: String = "contextual prefix".to_owned();
+    assert_eq!(warnv!(&ctx, i), 32); // ref required
+    assert_eq!(last(&a), Some("contextual prefix i → 32".to_owned()));
+
+    // Use non-String as prefix fails with:
+    // compiler error[E0308]: mistmatched types
+    // assert_eq!(warnv!(44, i), 32);
+    //                   ^^ expected &str, found integer
 
     // Explicit tuple for multiple expressions
     let j = 19;
@@ -81,8 +87,8 @@ fn main() {
     assert_eq!(q, 4);
     assert_eq!(r, 3);
     assert_eq!(last(&a), Some("(j / 4, j % 4) → (4, 3)".to_owned()));
-    // Explicit tuple and custom format
-    assert_eq!(debugv!("fifth {} → {:?}", (j/5, j%5)), (3, 4));
+    // Explicit tuple and custom prefix
+    assert_eq!(debugv!("fifth", (j/5, j%5)), (3, 4));
     assert_eq!(last(&a), Some("fifth (j / 5, j % 5) → (3, 4)".to_owned()));
 
     // Syntactic edge case of single value tuple
@@ -139,6 +145,10 @@ fn main() {
     infov!(m = 2);
     assert_eq!(m, 2);
     assert_eq!(last(&a), Some("m = 2 → ()".to_owned()));
+
+    let i = 4;
+    debugv!("bad output verbatim {:?}", i);
+    assert_eq!(last(&a), Some("bad output verbatim {:?} i → 4".to_owned()));
 
     info!("End of test (passed)");
 }

@@ -73,12 +73,11 @@
 //! #     fn mass(&self) -> f32 { 0.2 }
 //! # }
 //! # fn analyze(a: u32) -> Foo { Foo }
-//! use log::Level::Debug;
 //! use tao_log::*;
 //!
 //! # fn main() {
 //! # let asteroid = 1;
-//! if log_enabled!(Debug) {
+//! if log_enabled!(Level::Debug) {
 //!     let e = analyze(asteroid); // expensive!
 //!     debug!("Asteroid volume: {}, mass: {}", e.volume(), e.mass());
 //! }
@@ -109,10 +108,9 @@
 //! # let deadline = Instant::now() + Duration::new(0, 950_000);
 //!
 //! let remaining = debugv!(deadline - Instant::now());
-//! //                ^-- debug log: deadline - Instant::now() → 950µs
-//!
-//! debugv!(remaining); // alternative
-//! // ^--- debug log: remaining → 950µs
+//! //               ^-- debug log: deadline - Instant::now() → 950µs
+//! debugv!(remaining);
+//! // or            ^-- debug log: remaining → 950µs
 //! ```
 //!
 //! Note that the value of the expression is moved and then returned. If the
@@ -122,18 +120,24 @@
 //! The _default_ format string for the _-v_ macros is `"{} → {:?}"`, where
 //! the `stringify!`-ed expression and resulting value are passed, in that
 //! order.  If the log record is not filtered out, the `Debug` implementation
-//! for the type of the given expression value is used (`{:?}`).  A custom
-//! format string can _also_ be passed to the _-v_ macros, for more flexible
-//! output:
+//! for the type of the given expression value is used (`"{:?}"`).
+//!
+//! The log record can be customized via two optional parameters: a message
+//! prefix string, and a format specifier for the value. Note that the former
+//! is required, if passing the later:
 //!
 //! ```rust
 //! use tao_log::*;
 //!
 //! let i = 32;
-//! infov!("{} → {}", i);            // use `Display` instead of `Debug`
-//! infov!("{} → {:#x}", i);         // hexadecimal format value
-//! infov!("{} → {:#?}", i);         // use pretty, multi-line format
-//! infov!("index {1:5?} ({0})", i); // prefix, value first with padding
+//! infov!(i);
+//! infov!("", "{:?}", i);       // equivalent to above
+//! infov!("index", i);          // non-empty prefix with additional context
+//! // ^------------------------ info log: index i → 32
+//! infov!("index", "{}", i);    // use `Display` instead of `Debug`
+//! infov!("index", "{:#x}", i); // hexadecimal format value
+//! // ^------------------------ info log: index i → 0x20
+//! infov!("index", "{:#?}", i); // use pretty, multi-line format
 //! ```
 //!
 //! ### Specifying the logging target
@@ -146,13 +150,12 @@
 //! # fn stats() -> i32 { 33 }
 //! # fn main() {
 //! use tao_log::*;
-//! use log::Level::Info;
 //!
 //! let i = 33;
-//! let j = warnv!(target: "maths", (i-1) / 2);
+//! let j = debugv!(target: "maths", "halved", (i-1) / 2);
 //! # assert_eq!(j, 16);
 //!
-//! if log_enabled!(target: "special", Info) {
+//! if log_enabled!(target: "special", Level::Info) {
 //!     info!(target: "special", "{}", stats());
 //! }
 //! # }
@@ -166,6 +169,9 @@
 #![doc(html_logo_url = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Yin_and_Yang.svg")]
 
 pub use ::log;
+
+pub use log::Level;
+
 pub use log::{debug, error, info, log, log_enabled, trace, warn};
 
 #[macro_use] mod macros;

@@ -11,9 +11,11 @@
 /// Log an expression and its value at any specified level.
 ///
 /// Logs with the optional or default (module path of use) target, specified
-/// `Level`, optional or default (`"{} → {:?}"`) format string, and a single
-/// expression and value, which is returned.  This is normally only used
-/// through the _-v_ macros like `debugv!` or `tracev!`.
+/// `Level`, optional prefix, and optional or default (`"{:?}"`) value format
+/// string, and a single expression. The expression argument is evaluated
+/// exactly once, regardless of if the logging level is enabled, and its
+/// value is returned from the macro. This is normally only used through the
+/// _-v_ macros like `debugv!` or `tracev!`.
 ///
 /// Note that the value is moved and then returned. If the type does not
 /// implement `Copy`, ownership may be retained by borrowing by reference
@@ -85,17 +87,23 @@ macro_rules! tracev {
 #[doc(hidden)]
 #[macro_export(local_inner_macros)]
 macro_rules! __logv {
-    ($lvl:expr, target: $tgt:expr, $fmt:expr, $val:expr) => (
-        __logv_eval!($tgt, $lvl, $fmt, $val)
+    ($lvl:expr, target: $tgt:expr, $pre:expr, $vfmt:expr, $val:expr) => (
+        __logv_eval!($tgt, $lvl, $pre, $vfmt, $val)
+    );
+    ($lvl:expr, target: $tgt:expr, $pre:expr, $val:expr) => (
+        __logv_eval!($tgt, $lvl, $pre, "{:?}", $val)
     );
     ($lvl:expr, target: $tgt:expr, $val:expr) => (
-        __logv_eval!($tgt, $lvl, "{} → {:?}", $val)
+        __logv_eval!($tgt, $lvl, "", "{:?}", $val)
     );
-    ($lvl:expr, $fmt:expr, $val:expr) => (
-        __logv_eval!(__log_module_path!(), $lvl, $fmt, $val)
+    ($lvl:expr, $pre:expr, $vfmt:expr, $val:expr) => (
+        __logv_eval!(__log_module_path!(), $lvl, $pre, $vfmt, $val)
+    );
+    ($lvl:expr, $pre:expr, $val:expr) => (
+        __logv_eval!(__log_module_path!(), $lvl, $pre, "{:?}", $val)
     );
     ($lvl:expr, $val:expr) => (
-        __logv_eval!(__log_module_path!(), $lvl, "{} → {:?}", $val)
+        __logv_eval!(__log_module_path!(), $lvl, "", "{:?}", $val)
     );
 }
 
@@ -104,10 +112,18 @@ macro_rules! __logv {
 #[doc(hidden)]
 #[macro_export(local_inner_macros)]
 macro_rules! __logv_eval {
-    ($tgt:expr, $lvl:expr, $fmt:expr, $exp:expr) => (
+    ($tgt:expr, $lvl:expr, $pre:expr, $vfmt:expr, $exp:expr) => (
         match $exp {
             vt => {
-                log!(target: $tgt, $lvl, $fmt, __log_stringify!($exp), &vt);
+                let pre: &str = $pre;
+                let sep = if pre.is_empty() { "" } else { " " };
+                log!(target: $tgt,
+                     $lvl,
+                     __log_concat!("{}{}{} → ", $vfmt),
+                     pre,
+                     sep,
+                     __log_stringify!($exp),
+                     &vt);
                 vt
             }
         }
@@ -130,5 +146,13 @@ macro_rules! __log_module_path {
 macro_rules! __log_stringify {
     ($($args:tt)*) => {
         stringify!($($args)*)
+    };
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __log_concat {
+    ($($args:tt)*) => {
+        concat!($($args)*)
     };
 }
