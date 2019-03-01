@@ -12,6 +12,12 @@ keywords      = ["log", "logging"]
 categories    = ["Debugging"]
 exclude       = [".gitignore", ".travis.yml", "appveyor.yml"]
 
+[workspace]
+members = [
+    "test_2015",
+    "test_2018",
+]
+
 [badges]
 travis-ci = { repository="dekellum/tao-log" }
 
