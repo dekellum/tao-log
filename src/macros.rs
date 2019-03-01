@@ -51,31 +51,31 @@ macro_rules! logv {
     );
 }
 
-/// Log an expression at the error level, returning the value.
+/// Log an expression at the error level, returning its value.
 #[macro_export(local_inner_macros)]
 macro_rules! errorv {
     ($($arg:tt)+) => (__logv!($crate::Level::Error, $($arg)+))
 }
 
-/// Log an expression at the warn level, returning the value.
+/// Log an expression at the warn level, returning its value.
 #[macro_export(local_inner_macros)]
 macro_rules! warnv {
     ($($arg:tt)+) => (__logv!($crate::Level::Warn, $($arg)+))
 }
 
-/// Log an expression at the info level, returning the value.
+/// Log an expression at the info level, returning its value.
 #[macro_export(local_inner_macros)]
 macro_rules! infov {
     ($($arg:tt)+) => (__logv!($crate::Level::Info, $($arg)+))
 }
 
-/// Log an expression at the debug level, returning the value.
+/// Log an expression at the debug level, returning its value.
 #[macro_export(local_inner_macros)]
 macro_rules! debugv {
     ($($arg:tt)+) => (__logv!($crate::Level::Debug, $($arg)+))
 }
 
-/// Log an expression at the trace level, returning the value.
+/// Log an expression at the trace level, returning its value.
 #[macro_export(local_inner_macros)]
 macro_rules! tracev {
     ($($arg:tt)+) => (__logv!($crate::Level::Trace, $($arg)+))

@@ -17,16 +17,15 @@
 //! _only then_ published this standalone crate, in the hopes of gaining
 //! insights through use or abuse in the wild.
 //!
-//! Libraries and applications can use the _tao-log_ macros for all log
-//! output needs. This includes re-exported _log_ crate _formatted logging_
-//! macros, and a set of new “_-v_” suffix macros (e.g. `debugv!`) that
-//! provide _inline expression and value_ logging. Both sets of macros are
-//! given a new overview below, with examples using arbitrary log
-//! levels.
+//! Libraries and applications can use the _tao-log_ macros for all log output
+//! needs. This includes re-exported _log_ crate _formatted logging_ and
+//! associated macros, and a set of new “_-v_” suffix macros (e.g. `debugv!`)
+//! that provide _inline expression and value_ logging. Both sets of macros
+//! are given a new overview below, with examples using arbitrary log levels.
 //!
 //! If the new macros are eventually accepted to the _log_ crate in compatible
-//! form, this crate will be re-released with those re-exports, and possible
-//! deprecated in the future.
+//! form, this crate will be re-released with those re-exports, and possibly
+//! deprecated after that.
 //!
 //! Using the rust 2018 edition, all exported macros can be imported like a
 //! prelude:
@@ -133,12 +132,12 @@
 //! infov!(i);
 //! infov!("", "{:?}", i);       // equivalent to above
 //! // ^------------------------ info log: i → 32
-//! infov!("index", i);          // non-empty prefix with additional context
-//! infov!("index", "{}", i);    // use `Display` instead of `Debug`
+//! infov!("index", i);          // prefix for additional context
+//! infov!("index", "{}", i);    // use `Display` format for value
 //! // ^------------------------ info log: index i → 32
 //! infov!("index", "{:#x}", i); // hexadecimal format value
 //! // ^------------------------ info log: index i → 0x20
-//! infov!("index", "{:#?}", i); // pretty multi-line format, more for structs
+//! infov!("index", "{:#?}", i); // pretty multi-line format (for structs)
 //! ```
 //!
 //! ### Specifying the logging target
