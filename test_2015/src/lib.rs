@@ -3,7 +3,7 @@
 //! output. No-op is fine for this purpose.
 
 #[cfg(test)] #[macro_use] extern crate tao_log;
-#[cfg(test)] use tao_log::Level;
+#[cfg(test)] use tao_log::log::Level;
 
 #[test]
 fn test_2015_log_macros() {

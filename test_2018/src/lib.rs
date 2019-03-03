@@ -7,20 +7,20 @@
 #[test]
 fn test_2018_log_macros() {
     let i = 32;
-    if log_enabled!(target: "special", Level::Trace) {
+    if log_enabled!(target: "special", log::Level::Trace) {
         trace!(target: "special", "{}", i);
     }
     debug!("{:?}", i);
     info!("info");
     warn!("warn");
     error!("error");
-    log!(Level::Error, "error");
+    log!(log::Level::Error, "error");
 }
 
 #[test]
 fn test_2018_logv_macros() {
     let v = true;
-    logv!(target: "special", Level::Trace, v);
+    logv!(target: "special", log::Level::Trace, v);
     tracev!(v);
     debugv!(v);
     infov!(v);

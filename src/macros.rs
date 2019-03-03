@@ -24,8 +24,8 @@
 /// # Examples
 ///
 /// ```rust
-/// use log::Level;
 /// use tao_log::*;
+/// use tao_log::log::Level;
 ///
 /// #[derive(Debug)]
 /// struct Point { x: f32, y: f32 }
@@ -54,31 +54,31 @@ macro_rules! logv {
 /// Log an expression at the error level, returning its value.
 #[macro_export(local_inner_macros)]
 macro_rules! errorv {
-    ($($arg:tt)+) => (__logv!($crate::Level::Error, $($arg)+))
+    ($($arg:tt)+) => (__logv!($crate::log::Level::Error, $($arg)+))
 }
 
 /// Log an expression at the warn level, returning its value.
 #[macro_export(local_inner_macros)]
 macro_rules! warnv {
-    ($($arg:tt)+) => (__logv!($crate::Level::Warn, $($arg)+))
+    ($($arg:tt)+) => (__logv!($crate::log::Level::Warn, $($arg)+))
 }
 
 /// Log an expression at the info level, returning its value.
 #[macro_export(local_inner_macros)]
 macro_rules! infov {
-    ($($arg:tt)+) => (__logv!($crate::Level::Info, $($arg)+))
+    ($($arg:tt)+) => (__logv!($crate::log::Level::Info, $($arg)+))
 }
 
 /// Log an expression at the debug level, returning its value.
 #[macro_export(local_inner_macros)]
 macro_rules! debugv {
-    ($($arg:tt)+) => (__logv!($crate::Level::Debug, $($arg)+))
+    ($($arg:tt)+) => (__logv!($crate::log::Level::Debug, $($arg)+))
 }
 
 /// Log an expression at the trace level, returning its value.
 #[macro_export(local_inner_macros)]
 macro_rules! tracev {
-    ($($arg:tt)+) => (__logv!($crate::Level::Trace, $($arg)+))
+    ($($arg:tt)+) => (__logv!($crate::log::Level::Trace, $($arg)+))
 }
 
 // Helper macro for the -v macros, handling the permutations of optional

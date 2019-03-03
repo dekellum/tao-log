@@ -73,6 +73,7 @@
 //! # }
 //! # fn analyze(a: u32) -> Foo { Foo }
 //! use tao_log::*;
+//! use tao_log::log::Level;
 //!
 //! # fn main() {
 //! # let asteroid = 1;
@@ -150,6 +151,7 @@
 //! # fn stats() -> i32 { 33 }
 //! # fn main() {
 //! use tao_log::*;
+//! use tao_log::log::Level;
 //!
 //! let i = 33;
 //! let j = debugv!(target: "maths", "halved", (i-1) / 2);
@@ -170,7 +172,6 @@
 
 pub use ::log;
 
-pub use log::Level;
 pub use log::{debug, error, info, log, log_enabled, trace, warn};
 
 #[macro_use] mod macros;
