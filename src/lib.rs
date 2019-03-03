@@ -15,13 +15,14 @@
 //!
 //! This unenlightened wanderer (游侠) wrote a _log_ [PR], [RFC 317], and
 //! _only then_ published this standalone crate, in the hopes of gaining
-//! insights through use or abuse in the wild.
+//! insights through use in the wild.
 //!
 //! Libraries and applications can use the _tao-log_ macros for all log output
 //! needs. This includes re-exported _log_ crate _formatted logging_ and
 //! associated macros, and a set of new “_-v_” suffix macros (e.g. `debugv!`)
-//! that provide _inline expression and value_ logging. Both sets of macros
-//! are given a new overview below, with examples using arbitrary log levels.
+//! that provide _inline expression and value_ logging, as a superset of
+//! `std::dbg!`. Both sets of macros are given a new overview below, with
+//! examples using arbitrary log levels.
 //!
 //! If the new macros are eventually accepted to the _log_ crate in compatible
 //! form, this crate will be re-released with those re-exports, and possibly
