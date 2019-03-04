@@ -12,3 +12,7 @@ fn extra_placeholder_in_prefix() {
     let i = 4;
     warnv!("bad output verbatim {:?}", i); //~ ERROR 3 positional arguments in format string, but there are 2 arguments
 }
+
+fn trailing_comma() {
+    warnv!(33,); //~ ERROR expected identifier, found `,`
+}
