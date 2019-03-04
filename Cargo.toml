@@ -17,6 +17,7 @@ build         = "build.rs"
 members = [
     "test_2015",
     "test_2018",
+    "test_compile_errors",
 ]
 
 [badges]
