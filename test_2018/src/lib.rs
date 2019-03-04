@@ -2,6 +2,8 @@
 //! project, for all public macros. No logger is configured for output. No-op
 //! is fine for this purpose.
 
+// Exhaustively list all directly used macros, to test without any other
+// hidden helper macros in scope.
 #[cfg(test)] use tao_log::{
     log, log_enabled,
     trace, debug, info, warn, error,
