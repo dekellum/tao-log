@@ -1,0 +1,29 @@
+language: rust
+dist: xenial
+script:
+  - 'if [ "$WITH_LOCK" != "true" ]; then cargo update; fi'
+  - 'cargo test'
+  - 'cargo test -p test_2015 -p test_2018'
+
+# See https://levans.fr/rust_travis_cache.html
+cache:
+  directories:
+    - /home/travis/.cargo
+before_cache:
+  - rm -rf /home/travis/.cargo/registry
+
+env: # important!
+matrix:
+  include:
+    - rust: 1.31.0
+    - rust: 1.31.0
+      env: WITH_LOCK=true
+    - rust: stable
+      env: WITH_LOCK=true
+    - rust: nightly
+      env: MAY_FAIL=true
+    - rust: 1.31.0
+      os: osx
+      env: WITH_LOCK=true
+  allow_failures:
+    - env: MAY_FAIL=true
