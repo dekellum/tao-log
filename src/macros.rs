@@ -1,8 +1,8 @@
 // Copyright Ⓒ 2019 David Kellum
 //
-// Beyond the macro public re-exports found here, the _-v_ macros were
-// co-developed with https://github.com/rust-lang-nursery/log/pull/316 (by the
-// same author) and some other support macros are adopted from log 0.4.6.
+// These _-v_ macros were co-developed with
+// https://github.com/rust-lang-nursery/log/pull/316 (by the same author) and
+// some other support macros are adopted from log 0.4.6.
 //
 // All original _log_ source is offered under the same Apache 2.0 or MIT
 // licenses, and is:
@@ -47,7 +47,7 @@ macro_rules! logv {
         __logv!($lvl, target: $target, $($arg)+)
     );
     ($lvl:expr, $($arg:tt)+) => (
-        __logv!($lvl, target: __log_module_path!(), $($arg)+)
+        __logv!($lvl, target: __tao_target!(), $($arg)+)
     );
 }
 
@@ -87,34 +87,24 @@ macro_rules! tracev {
 #[doc(hidden)]
 #[macro_export(local_inner_macros)]
 macro_rules! __logv {
-    ($lvl:expr, target: $tgt:expr, $pre:expr, $vfmt:expr, $val:expr) => (
-        __logv_eval!($tgt, $lvl, __logv_frm!($pre, $vfmt), $val)
+    ($lvl:expr, target: $tgt:expr, $pre:expr, $vfmt:expr, $exp:expr) => (
+        __logv_eval!($tgt, $lvl, __tao_concat!($pre, " {} → ", $vfmt), $exp)
     );
-    ($lvl:expr, target: $tgt:expr, $pre:expr, $val:expr) => (
-        __logv_eval!($tgt, $lvl, __logv_frm!($pre), $val)
+    ($lvl:expr, target: $tgt:expr, $pre:expr, $exp:expr) => (
+        __logv_eval!($tgt, $lvl, __tao_concat!($pre, " {} → {:?}"), $exp)
     );
-    ($lvl:expr, target: $tgt:expr, $val:expr) => (
-        __logv_eval!($tgt, $lvl, __logv_frm!(), $val)
+    ($lvl:expr, target: $tgt:expr, $exp:expr) => (
+        __logv_eval!($tgt, $lvl, "{} → {:?}", $exp)
     );
-    ($lvl:expr, $pre:expr, $vfmt:expr, $val:expr) => (
-        __logv_eval!(__log_module_path!(), $lvl, __logv_frm!($pre, $vfmt), $val)
+    ($lvl:expr, $pre:expr, $vfmt:expr, $exp:expr) => (
+        __logv_eval!(__tao_target!(), $lvl, __tao_concat!($pre, " {} → ", $vfmt), $exp)
     );
-    ($lvl:expr, $pre:expr, $val:expr) => (
-        __logv_eval!(__log_module_path!(), $lvl, __logv_frm!($pre), $val)
+    ($lvl:expr, $pre:expr, $exp:expr) => (
+        __logv_eval!(__tao_target!(), $lvl, __tao_concat!($pre, " {} → {:?}"), $exp)
     );
-    ($lvl:expr, $val:expr) => (
-        __logv_eval!(__log_module_path!(), $lvl, __logv_frm!(), $val)
+    ($lvl:expr, $exp:expr) => (
+        __logv_eval!(__tao_target!(), $lvl, "{} → {:?}", $exp)
     );
-}
-
-// Inner helper macro for __logv, to compile to concatinate the format string
-// literal.
-#[doc(hidden)]
-#[macro_export(local_inner_macros)]
-macro_rules! __logv_frm {
-    ()                    => ("{} → {:?}");
-    ($pre:expr)           => (__log_concat!($pre, " {} → {:?}"));
-    ($pre:expr, $vf:expr) => (__log_concat!($pre, " {} → ", $vf));
 }
 
 // Inner helper macro for __logv. Evaluates expression exactly once, moves
@@ -127,7 +117,7 @@ macro_rules! __logv_eval {
             vt => {
                 $crate::log!(
                     target: $tgt, $lvl, $fmt,
-                    __log_stringify!($exp), &vt
+                    __tao_stringify!($exp), &vt
                 );
                 vt
             }
@@ -135,29 +125,25 @@ macro_rules! __logv_eval {
     )
 }
 
-// As a workaround for rustc < 1.30, provide thse local wrappers for the above
-// macros with local_inner_macros.
+// As a workaround for rustc < 1.30, provide these local wrappers for the
+// above macros with local_inner_macros. Note our MSRV is currently higher,
+// but we preserve this approach until it is certain we don't want to
+// backport.
 
 #[doc(hidden)]
 #[macro_export]
-macro_rules! __log_module_path {
-    () => {
-        module_path!()
-    };
+macro_rules! __tao_target {
+    () => (module_path!())
 }
 
 #[doc(hidden)]
 #[macro_export]
-macro_rules! __log_stringify {
-    ($($args:tt)*) => {
-        stringify!($($args)*)
-    };
+macro_rules! __tao_stringify {
+    ($($args:tt)*) => (stringify!($($args)*))
 }
 
 #[doc(hidden)]
 #[macro_export]
-macro_rules! __log_concat {
-    ($($args:tt)*) => {
-        concat!($($args)*)
-    };
+macro_rules! __tao_concat {
+    ($($args:tt)*) => (concat!($($args)*))
 }
