@@ -82,7 +82,7 @@ macro_rules! tracev {
 }
 
 // Helper macro for the -v macros, handling the permutations of optional
-// parameters. Note: The required level paremeter is first here for
+// parameters. Note: The required level parameter is first here for
 // convenience of internal use with variable-args.
 #[doc(hidden)]
 #[macro_export(local_inner_macros)]
