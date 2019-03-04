@@ -4,8 +4,8 @@
 // co-developed with https://github.com/rust-lang-nursery/log/pull/316 (by the
 // same author) and some other support macros are adopted from log 0.4.6.
 //
-// All original work is offered under the same Apache 2.0 or MIT licenses and
-// is:
+// All original _log_ source is offered under the same Apache 2.0 or MIT
+// licenses, and is:
 // Copyright Ⓒ 2015 The Rust Project Developers
 
 /// Log an expression and its value at any specified level.

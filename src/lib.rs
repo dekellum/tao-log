@@ -13,9 +13,8 @@
 //! > <em>“Why write an RFC, when you can just write code?”</em>
 //! > — 老子 (“Old Master”), 557 BCE
 //!
-//! This unenlightened wanderer (游侠) wrote a _log_ [PR], [RFC 317], and
-//! _only then_ published this standalone crate, in the hopes of gaining
-//! insights through use in the wild.
+//! This unenlightened wanderer (游侠) wrote a _log_ crate [PR] and [RFC 317],
+//! before published this standalone crate.
 //!
 //! Libraries and applications can use the _tao-log_ macros for all log output
 //! needs. This includes re-exported _log_ crate _formatted logging_ and
