@@ -1,4 +1,3 @@
-
 #![feature(test)]
 extern crate test; // Still required, see rust-lang/rust#55133
 use test::Bencher;
@@ -34,53 +33,99 @@ fn bench_logger() {
 }
 
 #[bench]
-fn run_log_on(b: &mut Bencher)
+fn b00_int_on(b: &mut Bencher)
 {
     bench_logger();
     let ivar = 10;
+    b.iter(|| {
+        let j = ivar + 1;
+        info!("ivar + 1 → {:?}", j);
+        assert_eq!(11, j);
+    })
+}
+
+#[bench]
+fn b00_int_on_v(b: &mut Bencher)
+{
+    bench_logger();
+    let ivar = 10;
+    b.iter(|| {
+        let j = infov!(ivar + 1);
+        assert_eq!(11, j);
+    })
+}
+
+#[bench]
+fn b10_str_on(b: &mut Bencher)
+{
+    bench_logger();
     let svar = "string";
     b.iter(|| {
-        info!("ivar → {:?}", ivar);
-        info!("svar → {:?}", svar);
         info!("prefix svar → {}", svar);
+        assert_eq!(svar.len(), 6);
     })
 }
 
 #[bench]
-fn run_logv_on(b: &mut Bencher)
+fn b10_str_on_v(b: &mut Bencher)
+{
+    bench_logger();
+    let svar = "string";
+    b.iter(|| {
+        assert_eq!(infov!("prefix", "{}", svar).len(), 6);
+    })
+}
+
+#[bench]
+fn b11_string_on(b: &mut Bencher)
+{
+    bench_logger();
+    let svar = "string";
+    b.iter(|| {
+        let s = svar.to_owned();
+        info!("prefix svar.to_owned() → {:?}", s);
+        assert_eq!(s.len(), 6);
+    })
+}
+
+#[bench]
+fn b11_string_on_v(b: &mut Bencher)
+{
+    bench_logger();
+    let svar = "string";
+    b.iter(|| {
+        assert_eq!(infov!(svar.to_owned()).len(), 6);
+    })
+}
+
+#[bench]
+fn b20_mix_off_10x(b: &mut Bencher)
 {
     bench_logger();
     let ivar = 10;
     let svar = "string";
     b.iter(|| {
-        assert_eq!(10, infov!(ivar));
-        infov!(svar);
-        infov!("prefix", "{}", svar);
+        for _ in 1..10 {
+            let j = ivar + 1;
+            trace!("ivar + 1 → {:?}", j);
+            assert_eq!(11, j);
+            trace!("svar → {:?}", svar);
+            trace!("prefix svar → {}", svar);
+        }
     })
 }
 
 #[bench]
-fn run_log_off(b: &mut Bencher)
+fn b20_mix_off_10x_v(b: &mut Bencher)
 {
     bench_logger();
     let ivar = 10;
     let svar = "string";
     b.iter(|| {
-        trace!("ivar → {:?}", ivar);
-        trace!("svar → {:?}", svar);
-        trace!("prefix svar → {}", svar);
-    })
-}
-
-#[bench]
-fn run_logv_off(b: &mut Bencher)
-{
-    bench_logger();
-    let ivar = 10;
-    let svar = "string";
-    b.iter(|| {
-        assert_eq!(10, tracev!(ivar));
-        tracev!(svar);
-        tracev!("prefix", "{}", svar);
+        for _ in 1..10 {
+            assert_eq!(11, tracev!(ivar + 1));
+            tracev!(svar);
+            tracev!("prefix", "{}", svar);
+        }
     })
 }
