@@ -77,6 +77,7 @@ fn main() {
     assert_eq!(q, 4);
     assert_eq!(r, 3);
     assert_eq!(last(&a), Some("(j / 4, j % 4) → (4, 3)".to_owned()));
+
     // Explicit tuple and custom prefix
     assert_eq!(debugv!("fifth", (j/5, j%5)), (3, 4));
     assert_eq!(last(&a), Some("fifth (j / 5, j % 5) → (3, 4)".to_owned()));
@@ -136,9 +137,25 @@ fn main() {
     assert_eq!(m, 2);
     assert_eq!(last(&a), Some("m = 2 → ()".to_owned()));
 
-    // Extra space if empty prefix is given.
+    // ### compiler accepted mis-features ###
+    //
+    // These are pretty innocuous, just resulting in unexpected output, but
+    // worth documentating. Proc-macros could produce sane compiler errors for
+    // these in the future.
+
+    // Extra space if empty prefix is given: No great way to check that at
+    // compile time.
     debugv!("", 22);
     assert_eq!(last(&a), Some(" 22 → 22".to_owned()));
+
+    // Non-string prefix literal is allowed
+    warnv!(666, 1);
+    assert_eq!(last(&a), Some("666 1 → 1".to_owned()));
+
+    // 2 placeholders in aggregate, wrong params
+    let i = 4;
+    debugv!("prefix with {:?}", "without", i);
+    assert_eq!(last(&a), Some("prefix with \"i\" 4 → without".to_owned()));
 
     info!("End of test (passed)");
 }
