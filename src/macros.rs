@@ -88,23 +88,33 @@ macro_rules! tracev {
 #[macro_export(local_inner_macros)]
 macro_rules! __logv {
     ($lvl:expr, target: $tgt:expr, $pre:expr, $vfmt:expr, $val:expr) => (
-        __logv_eval!($tgt, $lvl, $pre, $vfmt, $val)
+        __logv_eval!($tgt, $lvl, __logv_frm!($pre, $vfmt), $val)
     );
     ($lvl:expr, target: $tgt:expr, $pre:expr, $val:expr) => (
-        __logv_eval!($tgt, $lvl, $pre, "{:?}", $val)
+        __logv_eval!($tgt, $lvl, __logv_frm!($pre), $val)
     );
     ($lvl:expr, target: $tgt:expr, $val:expr) => (
-        __logv_eval!($tgt, $lvl, "", "{:?}", $val)
+        __logv_eval!($tgt, $lvl, __logv_frm!(), $val)
     );
     ($lvl:expr, $pre:expr, $vfmt:expr, $val:expr) => (
-        __logv_eval!(__log_module_path!(), $lvl, $pre, $vfmt, $val)
+        __logv_eval!(__log_module_path!(), $lvl, __logv_frm!($pre, $vfmt), $val)
     );
     ($lvl:expr, $pre:expr, $val:expr) => (
-        __logv_eval!(__log_module_path!(), $lvl, $pre, "{:?}", $val)
+        __logv_eval!(__log_module_path!(), $lvl, __logv_frm!($pre), $val)
     );
     ($lvl:expr, $val:expr) => (
-        __logv_eval!(__log_module_path!(), $lvl, "", "{:?}", $val)
+        __logv_eval!(__log_module_path!(), $lvl, __logv_frm!(), $val)
     );
+}
+
+// Inner helper macro for __logv, to compile to concatinate the format string
+// literal.
+#[doc(hidden)]
+#[macro_export(local_inner_macros)]
+macro_rules! __logv_frm {
+    ()                    => ("{} → {:?}");
+    ($pre:expr)           => (__log_concat!($pre, " {} → {:?}"));
+    ($pre:expr, $vf:expr) => (__log_concat!($pre, " {} → ", $vf));
 }
 
 // Inner helper macro for __logv. Evaluates expression exactly once, moves
@@ -112,18 +122,13 @@ macro_rules! __logv {
 #[doc(hidden)]
 #[macro_export(local_inner_macros)]
 macro_rules! __logv_eval {
-    ($tgt:expr, $lvl:expr, $pre:expr, $vfmt:expr, $exp:expr) => (
+    ($tgt:expr, $lvl:expr, $fmt:expr, $exp:expr) => (
         match $exp {
             vt => {
-                let pre: &str = $pre;
-                let sep = if pre.is_empty() { "" } else { " " };
-                $crate::log!(target: $tgt,
-                     $lvl,
-                     __log_concat!("{}{}{} → ", $vfmt),
-                     pre,
-                     sep,
-                     __log_stringify!($exp),
-                     &vt);
+                $crate::log!(
+                    target: $tgt, $lvl, $fmt,
+                    __log_stringify!($exp), &vt
+                );
                 vt
             }
         }

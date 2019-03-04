@@ -71,16 +71,6 @@ fn main() {
     assert_eq!(errorv!(target: "special", "custom:", "{:05}", i), 32);
     assert_eq!(last(&a), Some("custom: i → 00032".to_owned()));
 
-    // Use heap-String as prefix
-    let ctx: String = "contextual prefix".to_owned();
-    assert_eq!(warnv!(&ctx, i), 32); // ref required
-    assert_eq!(last(&a), Some("contextual prefix i → 32".to_owned()));
-
-    // Use non-String as prefix fails with:
-    // compiler error[E0308]: mistmatched types
-    // assert_eq!(warnv!(44, i), 32);
-    //                   ^^ expected &str, found integer
-
     // Explicit tuple for multiple expressions
     let j = 19;
     let (q, r) = debugv!((j/4, j%4));
@@ -146,9 +136,9 @@ fn main() {
     assert_eq!(m, 2);
     assert_eq!(last(&a), Some("m = 2 → ()".to_owned()));
 
-    let i = 4;
-    debugv!("bad output verbatim {:?}", i);
-    assert_eq!(last(&a), Some("bad output verbatim {:?} i → 4".to_owned()));
+    // Extra space if empty prefix is given.
+    debugv!("", 22);
+    assert_eq!(last(&a), Some(" 22 → 22".to_owned()));
 
     info!("End of test (passed)");
 }
