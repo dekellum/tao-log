@@ -2,7 +2,12 @@
 //! project, for all public macros. No logger is configured for output. No-op
 //! is fine for this purpose.
 
-#[cfg(test)] use tao_log::*;
+#[cfg(test)] use tao_log::{
+    log, log_enabled,
+    trace, debug, info, warn, error,
+    logv,
+    tracev, debugv, infov, warnv, errorv,
+};
 
 #[test]
 fn test_2018_log_macros() {
@@ -23,7 +28,7 @@ fn test_2018_logv_macros() {
     logv!(target: "special", log::Level::Trace, v);
     tracev!(v);
     debugv!(v);
-    infov!(v);
-    warnv!(v);
+    infov!("prefix", v);
+    warnv!("prefix", "{:?}", v);
     assert!(errorv!(v));
 }

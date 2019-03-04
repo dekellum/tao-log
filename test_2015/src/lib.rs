@@ -24,7 +24,7 @@ fn test_2015_logv_macros() {
     logv!(target: "special", Level::Trace, v);
     tracev!(v);
     debugv!(v);
-    infov!(v);
-    warnv!(v);
+    infov!("prefix", v);
+    warnv!("prefix", "{:?}", v);
     assert!(errorv!(v));
 }
