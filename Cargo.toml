@@ -16,6 +16,7 @@ exclude       = [".gitignore", ".travis.yml", "appveyor.yml"]
 members = [
     "test_2015",
     "test_2018",
+    "test_compile_errors",
 ]
 
 [badges]

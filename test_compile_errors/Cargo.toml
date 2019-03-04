@@ -1,0 +1,15 @@
+[package]
+name          = "test_compile_errors"
+version       = "6.6.6"
+publish       = false
+edition       = "2018"
+
+[dependencies]
+tao-log = { version=">= 0.1.0, <= 9000.0.0", path = ".." }
+
+[dev-dependencies]
+compiletest_rs = { version =">= 0.3.19, < 2.0" }
+
+[lib]
+doctest = false
+test = false
