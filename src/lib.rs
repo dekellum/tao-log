@@ -14,11 +14,11 @@
 //! > — 老子 (“Old Master”), 557 BCE
 //!
 //! This unenlightened wanderer (游侠) wrote a _log_ crate [PR] and [RFC 317],
-//! before published this standalone crate.
+//! before published the work as this standalone crate.
 //!
 //! Libraries and applications can use the _tao-log_ macros for all log output
 //! needs. This includes re-exported _log_ crate _formatted logging_ and
-//! associated macros, and a set of new “_-v_” suffix macros (e.g. `debugv!`)
+//! associated macros, and a set of new _-v_ suffix macros (e.g. `debugv!`)
 //! that provide _inline expression and value_ logging, as a superset of
 //! `std::dbg!`. Both sets of macros are given a new overview below, with
 //! examples using arbitrary log levels.
@@ -33,10 +33,10 @@
 //! ```rust
 //! use tao_log::*;
 //! ```
-//! Or if desired, imported on a per macro basis:
+//! Or if desired, import the individual macros:
 //!
 //! ```rust
-//! use tao_log::{debugv, debug, error, warn};
+//! use tao_log::{debug, debugv, error, warn};
 //! ```
 //!
 //! ### Formatted logging
@@ -108,8 +108,8 @@
 //!
 //! let remaining = debugv!(deadline - Instant::now());
 //! //               ^-- debug log: deadline - Instant::now() → 950µs
-//! debugv!(remaining);
-//! // or            ^-- debug log: remaining → 950µs
+//! debugv!("time until deadline", remaining);
+//! // or            ^-- debug log: time until deadline remaining → 950µs
 //! ```
 //!
 //! Note that the value of the expression is moved and then returned. If the

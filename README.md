@@ -8,12 +8,15 @@
 
 ## Extension macros for output to the rust _log_ crate
 
+Most notably this includes a set of _-v_ suffix macros
+(e.g. `debugv!`) that provide a superset of the `std::dbg!` feature.
+
 > <em>“Why write an RFC, when you can just write code?”</em>
 > — 老子 (“Old Master”), 557 BCE
 
 This unenlightened wanderer (游侠) wrote a _log_ crate [PR] and
 [RFC 317: _Inline Expression and Value Logging_][RFC 317], before publishing
-the work as standalone crate.
+the work as this standalone crate.
 
 See the [rustdoc](https://docs.rs/tao-log) for usage details.
 
