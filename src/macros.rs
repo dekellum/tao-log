@@ -25,7 +25,6 @@
 ///
 /// ```rust
 /// use tao_log::*;
-/// use tao_log::log::Level;
 ///
 /// #[derive(Debug)]
 /// struct Point { x: f32, y: f32 }
@@ -35,7 +34,7 @@
 /// # fn main() {
 /// let center = Point { x: 3.234, y: -1.223 };
 ///
-/// circle(logv!(Level::Trace, &center), 7.3);
+/// circle(logv!(log::Level::Trace, &center), 7.3);
 /// //     ^-- trace level message: "&center → Point { x: 3.234, y: -1.223 }"
 /// circle(tracev!(&center), 8.0);
 /// //     ^-- trace level message: "&center → Point { x: 3.234, y: -1.223 }"

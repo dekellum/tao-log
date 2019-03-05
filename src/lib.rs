@@ -73,11 +73,10 @@
 //! # }
 //! # fn analyze(a: u32) -> Foo { Foo }
 //! use tao_log::*;
-//! use tao_log::log::Level;
 //!
 //! # fn main() {
 //! # let asteroid = 1;
-//! if log_enabled!(Level::Debug) {
+//! if log_enabled!(log::Level::Debug) {
 //!     let e = analyze(asteroid); // expensive!
 //!     debug!("Asteroid volume: {}, mass: {}", e.volume(), e.mass());
 //! }
@@ -151,13 +150,12 @@
 //! # fn stats() -> i32 { 33 }
 //! # fn main() {
 //! use tao_log::*;
-//! use tao_log::log::Level;
 //!
 //! let i = 33;
 //! let j = debugv!(target: "maths", "halved", (i-1) / 2);
 //! # assert_eq!(j, 16);
 //!
-//! if log_enabled!(target: "special", Level::Info) {
+//! if log_enabled!(target: "special", log::Level::Info) {
 //!     info!(target: "special", "{}", stats());
 //! }
 //! # }
