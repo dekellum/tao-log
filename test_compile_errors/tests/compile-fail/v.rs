@@ -1,4 +1,4 @@
-//! Tests of *v (inline expression value) log macro compile failures
+//! Tests of -v macro prefix errors
 
 extern crate tao_log;
 use tao_log::*;
@@ -10,9 +10,10 @@ fn heap_string_as_prefix() {
 
 fn extra_placeholder_in_prefix() {
     let i = 4;
-    warnv!("bad output verbatim {:?}", i); //~ ERROR 3 positional arguments in format string, but there are 2 arguments
+    warnv!("bad prefix with {:?}", i); //~ ERROR 3 positional arguments in format string, but there are 2 arguments
 }
 
-fn trailing_comma() {
-    warnv!(33,); //~ ERROR expected identifier, found `,`
+fn missing_placeholder_in_value_format() {
+    let i = 4;
+    warnv!("prefix", "no place", i); //~ ERROR argument never used
 }
