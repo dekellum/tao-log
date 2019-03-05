@@ -5,6 +5,7 @@ script:
   - 'cargo test'
   - 'cargo test -p test_2015 -p test_2018'
   - 'if [ "$TRAVIS_RUST_VERSION" == "nightly" ]; then cargo build --release --all-targets; fi'
+  - 'if [ "$TRAVIS_RUST_VERSION" == "nightly" ]; then cargo test -p test_compile_errors; fi'
 
 # See https://levans.fr/rust_travis_cache.html
 cache:
