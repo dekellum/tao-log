@@ -137,6 +137,13 @@ fn main() {
     assert_eq!(m, 2);
     assert_eq!(last(&a), Some("m = 2 → ()".to_owned()));
 
+    // trailing comma:
+    #[cfg(trailing_comma)] {
+        let i = infov!(4,);
+        infov!("trailing comma", i,);
+        logv!(target: "special", Level::Info, i,);
+    }
+
     // ### compiler accepted mis-features ###
     //
     // These are pretty innocuous, just resulting in unexpected output, but

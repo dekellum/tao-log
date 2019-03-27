@@ -25,6 +25,9 @@ travis-ci = { repository="dekellum/tao-log" }
 [dependencies]
 log = { version = ">= 0.4.6, < 0.5" }
 
+[build-dependencies]
+version_check = { version=">=0.1.5, <2" }
+
 [[test]]
 name = "log_v"
 harness = false
