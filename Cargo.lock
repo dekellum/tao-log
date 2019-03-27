@@ -15,7 +15,7 @@ dependencies = [
 
 [[package]]
 name = "tao-log"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "version_check 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -25,14 +25,14 @@ dependencies = [
 name = "test_2015"
 version = "6.6.6"
 dependencies = [
- "tao-log 0.1.0",
+ "tao-log 0.2.0",
 ]
 
 [[package]]
 name = "test_2018"
 version = "6.6.6"
 dependencies = [
- "tao-log 0.1.0",
+ "tao-log 0.2.0",
 ]
 
 [[package]]
