@@ -135,7 +135,7 @@ fn main() {
     assert_eq!(m, 0);
     infov!(m = 1);
     assert_eq!(m, 1);
-    infov!{ m = 2 };
+    infov! { m = 2 };
     assert_eq!(m, 2);
     assert_eq!(last(&a), Some("m = 2 → ()".to_owned()));
 
