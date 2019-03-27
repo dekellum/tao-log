@@ -22,4 +22,11 @@ fn main() {
                 PACKAGE, VERSION, M_V);
         }
     }
+
+    match version_check::is_min_version("1.32.0") {
+        Some((true, _)) => {
+            println!("cargo:rustc-cfg=trailing_comma");
+        }
+        _ => {}
+    }
 }
