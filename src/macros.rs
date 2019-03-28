@@ -7,6 +7,27 @@
 // licenses, and is:
 // Copyright Ⓒ 2015 The Rust Project Developers
 
+/// Log a message at the error level, flush the logger, and then use the same
+/// message to panic.
+///
+/// This will duplicate the message, once via the registered
+/// logger, then again via stderr for the panic. Since this is a fatal
+/// condition, duplication is of less concern than the risk of missing the
+/// message. This will always `panic!`, even if no logger is configured, or if error
+/// level messages aren't logged.
+#[macro_export]
+macro_rules! fatal {
+    ($($arg:tt)+) => (
+        match format_args!($($arg)+) {
+            args => {
+                $crate::error!("{}", args);
+                $crate::log::logger().flush();
+                panic!("{}", args);
+            }
+        }
+    )
+}
+
 /// Log an expression and its value at any specified level.
 ///
 /// Logs with the optional or default (module path of use) target, specified
