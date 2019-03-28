@@ -28,3 +28,15 @@ fn test_2015_logv_macros() {
     warnv!("prefix", "{:?}", v);
     assert!(errorv!(v));
 }
+
+#[test]
+#[should_panic]
+fn test_2015_fatal_static_msg() {
+    fatal!("static fatal msg");
+}
+
+#[test]
+#[should_panic]
+fn test_2015_fatal_format_msg() {
+    fatal!("fmt {}", "failing");
+}
