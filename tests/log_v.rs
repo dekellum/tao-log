@@ -138,11 +138,9 @@ fn main() {
     assert_eq!(last(&a), Some("m = 2 → ()".to_owned()));
 
     // trailing comma:
-    #[cfg(trailing_comma)] {
-        let i = infov!(4,);
-        infov!("trailing comma", i,);
-        logv!(target: "special", Level::Info, i,);
-    }
+    let i = infov!(4,);
+    infov!("trailing comma", i,);
+    logv!(target: "special", Level::Info, i,);
 
     // ### compiler accepted mis-features ###
     //
@@ -163,6 +161,13 @@ fn main() {
     let i = 4;
     debugv!("prefix with {:?}", "without", i);
     assert_eq!(last(&a), Some("prefix with \"i\" 4 → without".to_owned()));
+
+    // multiple trailing commas are allowed before rustc 1.32.0
+    #[cfg(not(trailing_comma))] {
+        let i = infov!(5,,);
+        infov!("trailing comma", i,,);
+        logv!(target: "special", Level::Info, i,,);
+    }
 
     info!("End of test (passed)");
 }
