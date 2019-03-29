@@ -11,10 +11,21 @@
 /// message to panic.
 ///
 /// This will duplicate the message, once via the registered logger, then
-/// again via stderr for the panic. Since this is a fatal condition,
-/// duplication is of less concern than the risk of missing the message. This
-/// will always `panic!`, even if no logger is configured, or if error level
-/// messages aren't logged.
+/// again via stderr for the panic (default handler). Since this is a fatal
+/// and presumably serious condition, potential duplication is of less concern
+/// than the risk of missing the message. This will always `panic!`, even if
+/// no logger is configured, or if error level messages aren't logged.
+///
+/// # Example
+///
+/// ```rust,should_panic
+/// # use std::time::{Duration, Instant};
+/// use tao_log::fatal;
+///
+/// # let td = Duration::new(0, 100_000_000);
+/// fatal!("shields compromised, core breach in {:?}!", td);
+/// // ^1 -- error level message: shields compromised, core breach in 100ms!
+/// // ^2 -- panic:               shields compromised, core breach in 100ms!
 #[macro_export]
 macro_rules! fatal {
     ($($arg:tt)+) => (
