@@ -1,4 +1,10 @@
+[]( -*- mode: text; fill-column: 79 )
+
 ## 0.2.0 (TBD)
+
+* Add a `std` feature pass-through for the _log_ crate's `std` feature. We
+  use it for tests here.
+
 * Add _version_check_ as build dependency and a build.rs script to fail fast on
   attempt to compile with a rustc below MSRV, which remains 1.31.0.
 
