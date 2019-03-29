@@ -26,6 +26,7 @@
 /// fatal!("shields compromised, core breach in {:?}!", td);
 /// // ^1 -- error level message: shields compromised, core breach in 100ms!
 /// // ^2 -- panic:               shields compromised, core breach in 100ms!
+/// ```
 #[macro_export]
 macro_rules! fatal {
     (target: $target:expr, $($arg:tt)+) => (
