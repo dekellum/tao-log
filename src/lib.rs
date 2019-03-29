@@ -59,8 +59,9 @@
 //! above `debug!` statement does not log, and the cost of formatting the
 //! message string is avoided.
 //!
-//! To these formatting macros, _tao_log_ adds [`fatal!`](macro.fatal.html),
-//! which logs at _error_ level, and uses the same message to `panic!`.
+//! To these formatted logging macros, _tao_log_ adds a
+//! [`fatal!`](macro.fatal.html) macro, which logs at the _error_ level, and
+//! then uses the same message to `panic!`.
 //!
 //! ### Testing for output
 //!
