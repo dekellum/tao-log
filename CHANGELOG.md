@@ -1,4 +1,4 @@
-<!--- -*- mode: text; fill-column: 79 -*- --->
+// -*- mode: text; fill-column: 79 -*-
 
 ## 0.2.0 (TBD)
 
