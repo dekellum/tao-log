@@ -66,6 +66,7 @@ struct StaticMsgCheck(Arc<State>);
 
 impl Drop for StaticMsgCheck {
     fn drop(&mut self) {
+        eprintln!("checker drop called!");
         assert_eq!(self.0.take(), Some("static fatal msg".to_owned()));
     }
 }
@@ -84,6 +85,7 @@ struct FormatMsgCheck(Arc<State>);
 
 impl Drop for FormatMsgCheck {
     fn drop(&mut self) {
+        eprintln!("checker drop called!");
         assert_eq!(self.0.take(), Some("fmt fatal msg".to_owned()));
     }
 }
