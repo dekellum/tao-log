@@ -97,5 +97,5 @@ fn fatal_format_msg() {
     let s2 = s1.clone();
     let _test_guard = s1.lock();
     let _fr = FormatMsgCheck(s2);
-    fatal!("fmt {} msg", "fatal".to_owned());
+    fatal!(target: "grim", "fmt {} msg", "fatal".to_owned());
 }

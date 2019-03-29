@@ -28,15 +28,12 @@
 /// // ^2 -- panic:               shields compromised, core breach in 100ms!
 #[macro_export]
 macro_rules! fatal {
+    (target: $target:expr, $($arg:tt)+) => (
+        $crate::__tao_fatal!($target, $($arg)+)
+    );
     ($($arg:tt)+) => (
-        match format_args!($($arg)+) {
-            args => {
-                $crate::error!("{}", args);
-                $crate::log::logger().flush();
-                panic!("{}", args);
-            }
-        }
-    )
+        $crate::__tao_fatal!(module_path!(), $($arg)+)
+    );
 }
 
 /// Log an expression and its value at any specified level.
@@ -109,6 +106,21 @@ macro_rules! debugv {
 #[macro_export]
 macro_rules! tracev {
     ($($arg:tt)+) => ($crate::__tao_logv!($crate::log::Level::Trace, $($arg)+))
+}
+
+// Helper macro for `fatal!`
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __tao_fatal {
+    ($target:expr, $($arg:tt)+) => (
+        match format_args!($($arg)+) {
+            args => {
+                $crate::error!(target: $target, "{}", args);
+                $crate::log::logger().flush();
+                panic!("{}", args);
+            }
+        }
+    );
 }
 
 // Helper macro for the -v macros, handling the permutations of optional
