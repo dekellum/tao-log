@@ -25,7 +25,7 @@ fn main() {
 
     match version_check::is_min_version("1.32.0") {
         Some((true, _)) => {
-            println!("cargo:rustc-cfg=trailing_comma");
+            println!("cargo:rustc-cfg=tao_log_trailing_comma");
         }
         _ => {}
     }

@@ -165,7 +165,7 @@ fn main() {
     assert_eq!(last(&a), Some("prefix with \"i\" 4 → without".to_owned()));
 
     // multiple trailing commas are allowed before rustc 1.32.0
-    #[cfg(not(trailing_comma))] {
+    #[cfg(not(tao_log_trailing_comma))] {
         let i = infov!(5,,);
         infov!("trailing comma", i,,);
         logv!(target: "special", Level::Info, i,,);
