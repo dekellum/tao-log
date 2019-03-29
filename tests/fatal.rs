@@ -51,17 +51,15 @@ fn test_logger() -> Arc<State> {
     use log::LevelFilter;
     static TEST_LOG_INIT: Once = Once::new();
     static mut LOG_STATE: Option<Arc<State>> = None;
-    unsafe {
-        TEST_LOG_INIT.call_once(|| {
-            let s = Arc::new(State {
-                last_log: ReentrantMutex::new(RefCell::new(None))
-            });
-            LOG_STATE = Some(s.clone());
-            set_boxed_logger(Box::new(Logger(s))).unwrap();
-            log::set_max_level(LevelFilter::Debug);
+    TEST_LOG_INIT.call_once(|| {
+        let s = Arc::new(State {
+            last_log: ReentrantMutex::new(RefCell::new(None))
         });
-        LOG_STATE.as_ref().unwrap().clone()
-    }
+        unsafe { LOG_STATE = Some(s.clone()); }
+        set_boxed_logger(Box::new(Logger(s))).unwrap();
+        log::set_max_level(LevelFilter::Debug);
+    });
+    unsafe { LOG_STATE.as_ref().unwrap().clone() }
 }
 
 struct StaticMsgCheck(Arc<State>);
