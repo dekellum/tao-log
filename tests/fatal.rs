@@ -3,13 +3,11 @@
 use std::cell::RefCell;
 use std::sync::{Once, Arc};
 
-use tao_log::*;
 use log::{Log, Record, Metadata};
+#[cfg(feature = "std")] use log::set_boxed_logger;
 
+use tao_log::fatal;
 use parking_lot::{ReentrantMutex, ReentrantMutexGuard};
-
-#[cfg(feature = "std")]
-use log::set_boxed_logger;
 
 #[cfg(not(feature = "std"))]
 fn set_boxed_logger(logger: Box<Log>) -> Result<(), log::SetLoggerError> {
