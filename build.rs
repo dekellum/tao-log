@@ -1,16 +1,15 @@
-static PACKAGE: &str = "tao-log";
-static MSRV: &str = "1.31.0";
-static VERSION: &str = env!("CARGO_PKG_VERSION");
+static PACKAGE: &'static str = "tao-log";
+static MSRV: &'static str = "1.31.0";
+
+static VERSION: &'static str = env!("CARGO_PKG_VERSION");
+
+extern crate version_check;
 
 fn main() {
-    static M_V: &str = "minimum supported rust version (MSRV)";
+    static M_V: &'static str = "minimum supported rust version (MSRV)";
 
     match version_check::is_min_version(MSRV) {
-        Some((true, actual_v)) => {
-            eprintln!(
-                "{} v{} {} test passed: {} (actual rustc)",
-                PACKAGE, VERSION, M_V, actual_v);
-        }
+        Some((true, _actual_v)) => {}
         Some((false, actual_v)) => {
             panic!(
                 "{} v{} {} is {} > {} (this rustc)",
