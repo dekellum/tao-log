@@ -3,10 +3,10 @@ use std::process::Command;
 
 fn main() {
     static PACKAGE: &'static str = "tao-log";
+    let msrv = vec![1, 31];
+
     static VERSION: &'static str = env!("CARGO_PKG_VERSION");
     static M_V: &'static str = "minimum supported rust version (MSRV)";
-
-    let msrv = vec![1, 31];
 
     let rustv = rustc_version();
 
