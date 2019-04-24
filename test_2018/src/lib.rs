@@ -5,6 +5,7 @@
 // Exhaustively list all directly used macros, to test without any other
 // hidden helper macros in scope.
 #[cfg(test)] use tao_log::{
+    fatal,
     log, log_enabled,
     trace, debug, info, warn, error,
     logv,
@@ -33,4 +34,16 @@ fn test_2018_logv_macros() {
     infov!("prefix", v);
     warnv!("prefix", "{:?}", v);
     assert!(errorv!(v));
+}
+
+#[test]
+#[should_panic]
+fn test_2018_fatal_static_msg() {
+    fatal!("static fatal msg");
+}
+
+#[test]
+#[should_panic]
+fn test_2018_fatal_format_msg() {
+    fatal!("fmt {}", "failing");
 }

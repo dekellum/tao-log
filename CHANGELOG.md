@@ -1,4 +1,5 @@
 ## 0.2.0 (TBD)
+* Add new `fatal!` macro, which works just like `error!` plus `panic!` (#1)
 
 * Add a `std` feature pass-through for the _log_ crate's `std` feature. We
   use it for tests here.

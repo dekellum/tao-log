@@ -59,6 +59,10 @@
 //! above `debug!` statement does not log, and the cost of formatting the
 //! message string is avoided.
 //!
+//! To these formatted logging macros, _tao-log_ adds a
+//! [`fatal!`](macro.fatal.html) macro, which logs at the _error_ level, and
+//! then uses the same message to `panic!`.
+//!
 //! ### Testing for output
 //!
 //! The [`log_enabled!`](macro.log_enabled.html) macro may be used to
