@@ -9,7 +9,7 @@ documentation = "https://docs.rs/tao-log"
 repository    = "https://github.com/dekellum/tao-log"
 readme        = "README.md"
 keywords      = ["log", "logging"]
-categories    = ["Debugging"]
+categories    = ["development-tools::debugging"]
 exclude       = [".gitignore", ".travis.yml", "appveyor.yml"]
 build         = "build.rs"
 
