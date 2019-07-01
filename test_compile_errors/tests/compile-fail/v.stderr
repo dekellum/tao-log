@@ -24,9 +24,3 @@ error: argument never used
    |     formatting specifier missing
    |
    = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
-
-error[E0601]: `main` function not found in crate `$CRATE`
-  |
-  = note: consider adding a `main` function to `$DIR/tests/compile-fail/v.rs`
-
-For more information about this error, try `rustc --explain E0601`.

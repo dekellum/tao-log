@@ -10,3 +10,5 @@ fn zero_arguments() {
 fn four_arguments() {
     infov!("prefix", "{}", true, 4);
 }
+
+fn main() {}

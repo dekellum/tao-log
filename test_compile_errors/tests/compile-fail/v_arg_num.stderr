@@ -9,9 +9,3 @@ error: no rules expected the token `4`
    |
 11 |     infov!("prefix", "{}", true, 4);
    |                                  ^ no rules expected this token in macro call
-
-error[E0601]: `main` function not found in crate `$CRATE`
-  |
-  = note: consider adding a `main` function to `$DIR/tests/compile-fail/v_arg_num.rs`
-
-For more information about this error, try `rustc --explain E0601`.

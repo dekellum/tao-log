@@ -17,3 +17,5 @@ fn missing_placeholder_in_value_format() {
     let i = 4;
     warnv!("prefix", "no place", i);
 }
+
+fn main() {}
