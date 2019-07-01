@@ -10,7 +10,7 @@ use tao_log::fatal;
 use parking_lot::{ReentrantMutex, ReentrantMutexGuard};
 
 #[cfg(not(feature = "std"))]
-fn set_boxed_logger(logger: Box<Log>) -> Result<(), log::SetLoggerError> {
+fn set_boxed_logger(logger: Box<dyn Log>) -> Result<(), log::SetLoggerError> {
     log::set_logger(Box::leak(logger))
 }
 
