@@ -1,0 +1,5 @@
+error: no rules expected the token `,`
+ --> $DIR/v_multi_comma.rs:7:15
+  |
+7 |     infov!(33,,);
+  |               ^ no rules expected this token in macro call
