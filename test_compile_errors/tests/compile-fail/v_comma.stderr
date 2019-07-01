@@ -1,5 +1,5 @@
 error: no rules expected the token `,`
  --> $DIR/v_comma.rs:7:12
   |
-7 |     infov!(,); //~ ERROR expected identifier, found `,`
+7 |     infov!(,);
   |            ^ no rules expected this token in macro call

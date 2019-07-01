@@ -4,7 +4,7 @@ extern crate tao_log;
 use tao_log::*;
 
 fn zero_arguments_comma() {
-    infov!(,); //~ ERROR expected identifier, found `,`
+    infov!(,);
 }
 
 fn main() {}
