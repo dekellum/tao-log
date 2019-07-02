@@ -22,7 +22,7 @@ See the [rustdoc](https://docs.rs/tao-log) for usage details.
 
 ## Minimum supported rust version
 
-\<msrv>1.31.0\</msrv>
+MSRV := 1.31.0
 
 The project will fail fast on any lower rustc (via a build.rs version
 check) and is also CI tested on this version, included both 2015 and 2018 edition
