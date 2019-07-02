@@ -20,9 +20,9 @@ the work as this standalone crate.
 
 See the [rustdoc](https://docs.rs/tao-log) for usage details.
 
-## Minimum supported rust version (MSRV)
+## Minimum supported rust version
 
-1.31.0
+\<msrv>1.31.0\</msrv>
 
 The project will fail fast on any lower rustc (via a build.rs version
 check) and is also CI tested on this version, included both 2015 and 2018 edition
@@ -30,9 +30,14 @@ external macro imports. A PR would be considered to backport the project to
 earlier rust versions, possibly as far back as 1.16.0 (_log_'s current MSRV).
 Or consider lobbying for the inclusion of this feature in _log_ itself.
 
-[log]: https://docs.rs/crate/log
-[PR]: https://github.com/rust-lang-nursery/log/pull/316
-[RFC 317]: https://github.com/rust-lang-nursery/log/pull/317
+With rustc 1.32.0+, one (but not more than one) trailing comma is properly
+accepted in _-v_ macro calls.  On 1.31.0, multiple trailing commas are
+erroneously accepted.
+
+Compile time errors for misuse of _-v_ macros (e.g. 0 arguments, 4 arguments,
+non-literal prefix argument, missing format specifier, etc.) are tested and
+verified on rustc 1.35.0 and nightly, currently. Earlier rustc versions may
+produce less clear errors.
 
 ## License
 
@@ -49,3 +54,7 @@ This project is dual licensed under either of following:
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in tao-log by you, as defined by the Apache License, shall be
 dual licensed as above, without any additional terms or conditions.
+
+[log]: https://docs.rs/crate/log
+[PR]: https://github.com/rust-lang-nursery/log/pull/316
+[RFC 317]: https://github.com/rust-lang-nursery/log/pull/317
