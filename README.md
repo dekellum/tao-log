@@ -24,7 +24,7 @@ See the [rustdoc](https://docs.rs/tao-log) for usage details.
 
 MSRV := 1.31.0
 
-The project will fail fast on any lower rustc (via a build.rs version
+The crate will fail fast on any lower rustc (via a build.rs version
 check) and is also CI tested on this version, included both 2015 and 2018 edition
 external macro imports. A PR would be considered to backport the project to
 earlier rust versions, possibly as far back as 1.16.0 (_log_'s current MSRV).
