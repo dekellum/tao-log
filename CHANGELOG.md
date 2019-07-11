@@ -1,3 +1,5 @@
+## 0.2.1 (TBD)
+
 ## 0.2.0 (2019-4-24)
 * Add new `fatal!` macro, which works just like `error!` plus `panic!` (#1)
 

@@ -211,7 +211,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "tao-log"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "log 0.4.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "parking_lot 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -221,14 +221,14 @@ dependencies = [
 name = "test_2015"
 version = "6.6.6"
 dependencies = [
- "tao-log 0.2.0",
+ "tao-log 0.2.1",
 ]
 
 [[package]]
 name = "test_2018"
 version = "6.6.6"
 dependencies = [
- "tao-log 0.2.0",
+ "tao-log 0.2.1",
 ]
 
 [[package]]
