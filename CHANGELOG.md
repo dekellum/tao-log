@@ -1,4 +1,5 @@
 ## 0.2.1 (TBD)
+* Fix build.rs for `rustc --version` not including git metadata
 
 ## 0.2.0 (2019-4-24)
 * Add new `fatal!` macro, which works just like `error!` plus `panic!` (#1)
