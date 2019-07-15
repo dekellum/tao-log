@@ -1,5 +1,8 @@
 ## 0.2.1 (TBD)
-* Fix build.rs for `rustc --version` not including git metadata
+* Fix build.rs for `rustc --version` not including git metadata.
+
+* Add macro use, compiler error message tests with CI on nightly, based on
+  _trybuild_.
 
 ## 0.2.0 (2019-4-24)
 * Add new `fatal!` macro, which works just like `error!` plus `panic!` (#1)
