@@ -1,5 +1,5 @@
 language: rust
-dist: xenial
+dist: bionic
 script:
   - 'if [ "$WITH_LOCK" != "true" ]; then cargo update; fi'
   - 'cargo test'
