@@ -1,4 +1,5 @@
 ## 0.3.0 (TBD)
+* Increase MSRV to 1.32.0, removing special handling for 1.31.0.
 
 ## 0.2.1 (2019-7-26)
 * Fix build.rs for `rustc --version` not including git metadata.

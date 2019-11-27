@@ -129,7 +129,6 @@ macro_rules! __tao_fatal {
 // convenience of internal use with variable-args.
 #[doc(hidden)]
 #[macro_export]
-#[cfg(tao_log_trailing_comma)]
 macro_rules! __tao_logv {
     ($lvl:expr, target: $tgt:expr, $pre:expr, $vfmt:expr, $exp:expr $(,)?) => (
         $crate::__tao_v_eval!($tgt, $lvl, concat!($pre, " {} → ", $vfmt), $exp)
@@ -147,30 +146,6 @@ macro_rules! __tao_logv {
         $crate::__tao_v_eval!(module_path!(), $lvl, concat!($pre, " {} → {:?}"), $exp)
     );
     ($lvl:expr, $exp:expr $(,)?) => (
-        $crate::__tao_v_eval!(module_path!(), $lvl, "{} → {:?}", $exp)
-    );
-}
-
-#[doc(hidden)]
-#[macro_export]
-#[cfg(not(tao_log_trailing_comma))]
-macro_rules! __tao_logv {
-    ($lvl:expr, target: $tgt:expr, $pre:expr, $vfmt:expr, $exp:expr $(,)*) => (
-        $crate::__tao_v_eval!($tgt, $lvl, concat!($pre, " {} → ", $vfmt), $exp)
-    );
-    ($lvl:expr, target: $tgt:expr, $pre:expr, $exp:expr $(,)*) => (
-        $crate::__tao_v_eval!($tgt, $lvl, concat!($pre, " {} → {:?}"), $exp)
-    );
-    ($lvl:expr, target: $tgt:expr, $exp:expr $(,)*) => (
-        $crate::__tao_v_eval!($tgt, $lvl, "{} → {:?}", $exp)
-    );
-    ($lvl:expr, $pre:expr, $vfmt:expr, $exp:expr $(,)*) => (
-        $crate::__tao_v_eval!(module_path!(), $lvl, concat!($pre, " {} → ", $vfmt), $exp)
-    );
-    ($lvl:expr, $pre:expr, $exp:expr $(,)*) => (
-        $crate::__tao_v_eval!(module_path!(), $lvl, concat!($pre, " {} → {:?}"), $exp)
-    );
-    ($lvl:expr, $exp:expr $(,)*) => (
         $crate::__tao_v_eval!(module_path!(), $lvl, "{} → {:?}", $exp)
     );
 }

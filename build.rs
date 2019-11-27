@@ -3,7 +3,7 @@ use std::process::Command;
 
 fn main() {
     static PACKAGE: &'static str = "tao-log";
-    let msrv = vec![1, 31];
+    let msrv = vec![1, 32];
 
     static VERSION: &'static str = env!("CARGO_PKG_VERSION");
     static M_V: &'static str = "minimum supported rust version (MSRV)";
@@ -14,10 +14,6 @@ fn main() {
         panic!(
             "{} v{} {} is {} > {} (this rustc)",
             PACKAGE, VERSION, M_V, join(&msrv), join(&rustv));
-    }
-
-    if rustv >= vec![1, 32] {
-        println!("cargo:rustc-cfg=tao_log_trailing_comma");
     }
 }
 

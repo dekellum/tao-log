@@ -22,7 +22,7 @@ See the [rustdoc](https://docs.rs/tao-log) for usage details.
 
 ## Minimum supported rust version
 
-MSRV := 1.31.0
+MSRV := 1.32.0
 
 The crate will fail fast on any lower rustc (via a build.rs version
 check) and is also CI tested on this version, included both 2015 and 2018 edition
@@ -30,14 +30,10 @@ external macro imports. A PR would be considered to backport the project to
 earlier rust versions, possibly as far back as 1.16.0 (_log_'s current MSRV).
 Or consider lobbying for the inclusion of this feature in _log_ itself.
 
-With rustc 1.32.0+, one (but not more than one) trailing comma is properly
-accepted in _-v_ macro calls.  On 1.31.0, multiple trailing commas are
-erroneously accepted.
-
 Compile time errors for misuse of _-v_ macros (e.g. 0 arguments, 4 arguments,
 non-literal prefix argument, missing format specifier, etc.) are tested and
-verified on rustc 1.35.0 and nightly, currently. Earlier rustc versions may
-produce less clear errors.
+verified on rustc stable and nightly, currently. Earlier rustc versions, prior
+to 1.35.0, may produce less clear errors.
 
 ## License
 
