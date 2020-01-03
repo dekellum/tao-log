@@ -1,4 +1,4 @@
-## 1.0.0 (TBD)
+## 1.0.0 (2020-1-3)
 * Increase MSRV to 1.32.0, removing special handling for 1.31.0.
 
 ## 0.2.1 (2019-7-26)
