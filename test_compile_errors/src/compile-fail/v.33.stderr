@@ -1,0 +1,26 @@
+error: expected a literal
+ --> $DIR/v.rs:8:12
+  |
+8 |     warnv!(&ctx, 1);
+  |            ^^^^
+  |
+  = note: only literals (like `"foo"`, `42` and `3.14`) can be passed to `concat!()`
+
+error: 3 positional arguments in format string, but there are 2 arguments
+  --> $DIR/v.rs:13:5
+   |
+13 |     warnv!("bad prefix with {:?}", i);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
+
+error: argument never used
+  --> $DIR/v.rs:18:5
+   |
+18 |     warnv!("prefix", "no place", i);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |     |
+   |     argument never used
+   |     formatting specifier missing
+   |
+   = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
