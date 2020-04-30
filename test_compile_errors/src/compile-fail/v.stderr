@@ -12,7 +12,7 @@ error: 3 positional arguments in format string, but there are 2 arguments
 13 |     warnv!("bad prefix with {:?}", i);
    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    |
-   = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: argument never used
   --> $DIR/v.rs:18:5
@@ -23,4 +23,4 @@ error: argument never used
    |     argument never used
    |     formatting specifier missing
    |
-   = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
