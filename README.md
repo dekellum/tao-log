@@ -3,8 +3,7 @@
 [![Rustdoc](https://docs.rs/tao-log/badge.svg)](https://docs.rs/tao-log)
 [![Change Log](https://img.shields.io/crates/v/tao-log.svg?maxAge=3600&label=change%20log&color=9cf)](https://github.com/dekellum/tao-log/blob/master/CHANGELOG.md)
 [![Crates.io](https://img.shields.io/crates/v/tao-log.svg?maxAge=3600)](https://crates.io/crates/tao-log)
-[![Travis CI Build](https://travis-ci.org/dekellum/tao-log.svg?branch=master)](https://travis-ci.org/dekellum/tao-log)
-[![Appveyor CI Build](https://ci.appveyor.com/api/projects/status/iapsfe9s6sre3f0u/branch/master?svg=true)](https://ci.appveyor.com/project/dekellum/tao-log)
+[![CI Status](https://github.com/dekellum/tao-log/workflows/CI/badge.svg?branch=master)](https://github.com/dekellum/tao-log/actions?query=workflow%3ACI)
 [![deps status](https://deps.rs/repo/github/dekellum/tao-log/status.svg)](https://deps.rs/repo/github/dekellum/tao-log)
 
 ## Extension macros for output to the rust _log_ crate
