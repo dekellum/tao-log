@@ -69,7 +69,7 @@ jobs:
 
       - name: Test Compile Errors
         if: ${{ matrix.rust != '1.32.0' }}
-        run: cargo test -p test_compiler_errors
+        run: cargo test -p test_compile_errors
 
       - name: Build all targets
         if: ${{ contains(matrix.extras, 'all') }}
