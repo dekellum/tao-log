@@ -34,10 +34,9 @@ jobs:
             os: ubuntu-20.04
           - rust: nightly
             os: ubuntu-20.04
-            extras: [all]
           - rust: nightly
             os: ubuntu-20.04
-            extras: [update, all]
+            extras: [update]
           - rust: nightly
             os: windows-latest
 
@@ -45,32 +44,32 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install Rust (${{ matrix.rust }})
+      - name: Install rust (${{ matrix.rust }})
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
           toolchain: ${{ matrix.rust }}
           override: true
 
-      - name: Update Deps
+      - name: Update deps
         if: ${{ contains(matrix.extras, 'update') }}
         run: cargo update
 
       - name: Test
-        run: cargo update
+        run: cargo test
 
-      - name: Test Macro Editions
+      - name: Test macro editions
         run: cargo test -p test_2015 -p test_2018
 
-      - name: Prep Compiler Errors
+      - name: Prep compiler errors
         if: ${{ matrix.rust == '1.39.0' }}
         working-directory: test_compile_errors/src/compile-fail
         run: cp v.33.stderr v.stderr
 
-      - name: Test Compile Errors
+      - name: Test compile errors
         if: ${{ matrix.rust != '1.32.0' }}
         run: cargo test -p test_compile_errors
 
       - name: Build all targets
-        if: ${{ contains(matrix.extras, 'all') }}
+        if: ${{ matrix.rust == 'nightly' }}
         run: cargo build --release --all-targets
