@@ -1,3 +1,6 @@
+## 1.0.1 (2021-1-8)
+* Small documentation improvements, only.
+
 ## 1.0.0 (2020-1-3)
 * Increase MSRV to 1.32.0, removing special handling for 1.31.0.
 
