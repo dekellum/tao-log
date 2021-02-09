@@ -34,7 +34,7 @@ impl Log for Logger {
         assert_eq!(record.file(), Some(file!()));
         assert!(record.line().is_some());
         let t = record.target().to_owned();
-        assert!(t == "log_v" || t == "special", t);
+        assert!(t == "log_v" || t == "special", "{}", t);
         println!("{:5} {}", record.level(), record.args());
     }
 
