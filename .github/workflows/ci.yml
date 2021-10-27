@@ -63,10 +63,12 @@ jobs:
       - name: Prep compiler errors
         if: ${{ matrix.rust == '1.39.0' }}
         working-directory: test_compile_errors/src/compile-fail
-        run: cp v.33.stderr v.stderr
+        run:
+          - cp v.33.stderr v.stderr
+          - cp v_arg_num.33.stderr v_arg_num.stderr
 
       - name: Test compile errors
-        if: ${{ matrix.rust != '1.32.0' }}
+        if: ${{ matrix.rust == '1.39.0' }}
         run: cargo test -p test_compile_errors
 
       - name: Build all targets
