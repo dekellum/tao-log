@@ -32,8 +32,8 @@ Or consider lobbying for the inclusion of this feature in _log_ itself.
 
 Compile time errors for misuse of _-v_ macros (e.g. 0 arguments, 4 arguments,
 non-literal prefix argument, missing format specifier, etc.) are tested and
-verified on rustc stable and nightly, currently. Earlier rustc versions, prior
-to 1.35.0, may produce less clear errors.
+verified (see ./test_compile_errors). Rustc versions prior to 1.39.0 may
+produce less clear errors.
 
 ## License
 
