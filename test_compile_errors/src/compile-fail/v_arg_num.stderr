@@ -2,7 +2,7 @@ error: unexpected end of macro invocation
  --> $DIR/v_arg_num.rs:7:5
   |
 7 |     infov!();
-  |     ^^^^^^^^^ missing tokens in macro arguments
+  |     ^^^^^^^^ missing tokens in macro arguments
 
 error: no rules expected the token `4`
   --> $DIR/v_arg_num.rs:11:34
